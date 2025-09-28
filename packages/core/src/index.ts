@@ -71,3 +71,6 @@ export * from './types';
 export * from './core';
 export * from './drivers';
 export * from './collections';
+
+// Explicitly export getCurrentDriver and subscribe
+export { getCurrentDriver, subscribe } from './core';

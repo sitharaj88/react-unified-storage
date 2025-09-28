@@ -1,4 +1,4 @@
-import type { StorageConfig, Envelope, Driver } from './types';
+import type { StorageConfig, Envelope, Driver, StorageDriver } from './types';
 import { createDriver } from './drivers';
 import { makeAesKey, encrypt, decrypt } from './crypto';
 import { compress, decompress } from './compress';
@@ -337,6 +337,26 @@ export function driverId(): string {
  * // Later: unsubscribe()
  * ```
  */
-export function getCurrentDriver(): string {
-  return currentDriverName;
+export function subscribe(callback: (key: string, envelope: Envelope<unknown> | null) => void): () => void {
+  if (!broadcastManager) {
+    throw new Error('Broadcasting is not enabled. Enable broadcasting in setup() to use subscribe().');
+  }
+  return broadcastManager.subscribe(callback);
+}
+
+/**
+ * Gets the identifier of the currently active storage driver.
+ *
+ * Returns the driver type that is currently being used for storage operations.
+ * This can be useful for debugging or conditional logic based on the storage backend.
+ *
+ * @returns The identifier of the current storage driver
+ *
+ * @example
+ * ```typescript
+ * console.log('Current driver:', getCurrentDriver()); // 'idb', 'local', 'memory', etc.
+ * ```
+ */
+export function getCurrentDriver(): StorageDriver {
+  return currentDriverName as StorageDriver;
 }
