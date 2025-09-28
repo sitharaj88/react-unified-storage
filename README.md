@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/%40sitharaj08%2Freact-unified-storage-core.svg)](https://badge.fury.io/js/%40sitharaj08%2Freact-unified-storage-core)
 [![Build Status](https://github.com/sitharaj08/react-unified-storage/workflows/CI/badge.svg)](https://github.com/sitharaj08/react-unified-storage/actions)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@sitharaj08/react-unified-storage)](https://bundlephobia.com/package/@sitharaj08/react-unified-storage)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 *One unified, secure, and modern storage solution for React applications.*
@@ -554,4 +554,16 @@ The library automatically detects SSR and falls back to memory storage:
 
 ## License
 
-MIT
+Copyright 2025 Sitharaj Seenivasan
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

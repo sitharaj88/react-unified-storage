@@ -155,7 +155,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Sitharaj Seenivasan. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Sitharaj Seenivasan.`,
     },
     prism: {
       theme: prismThemes.github,

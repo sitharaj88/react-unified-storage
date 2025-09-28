@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import React, { type ReactNode } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -11,23 +11,47 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/getting-started">
-            Get Started - 5min ⏱️
-          </Link>
-          <Link
-            className="button button--outline button--lg"
-            to="/docs/quick-start">
-            Quick Start
-          </Link>
+        <div className={styles.heroContent}>
+          <Heading as="h1" className={styles.heroTitle}>
+            {siteConfig.title}
+          </Heading>
+          <p className={styles.heroSubtitle}>
+            One unified, secure, and modern storage solution for React applications
+          </p>
+          <div className={styles.heroBadges}>
+            <span className={styles.badge}>🔒 End-to-End Encryption</span>
+            <span className={styles.badge}>⚡ TypeScript First</span>
+            <span className={styles.badge}>🔄 Cross-Tab Sync</span>
+            <span className={styles.badge}>📦 Zero Dependencies</span>
+          </div>
+          <div className={styles.heroStats}>
+            <div className={styles.stat}>
+              <div className={styles.statNumber}>4</div>
+              <div className={styles.statLabel}>Storage Drivers</div>
+            </div>
+            <div className={styles.stat}>
+              <div className={styles.statNumber}>100%</div>
+              <div className={styles.statLabel}>Type Safe</div>
+            </div>
+            <div className={styles.stat}>
+              <div className={styles.statNumber}>SSR</div>
+              <div className={styles.statLabel}>Compatible</div>
+            </div>
+          </div>
+          <div className={styles.buttons}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/getting-started">
+              🚀 Get Started - 5min
+            </Link>
+            <Link
+              className="button button--primary button--lg"
+              to="/docs/quick-start">
+              📖 Quick Start Guide
+            </Link>
+          </div>
         </div>
       </div>
     </header>
