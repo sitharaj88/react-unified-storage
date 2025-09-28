@@ -1,9 +1,7 @@
 # React Unified Storage
 
-[![npm version](https://badge.fury.io/js/%40sitharaj08%2Freact-unified-storage.svg)](https://badge.fury.io/js/%40sitharaj08%2Freact-unified-storage)
+
 [![npm version](https://badge.fury.io/js/%40sitharaj08%2Freact-unified-storage-core.svg)](https://badge.fury.io/js/%40sitharaj08%2Freact-unified-storage-core)
-[![Build Status](https://github.com/sitharaj08/react-unified-storage/workflows/CI/badge.svg)](https://github.com/sitharaj08/react-unified-storage/actions)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@sitharaj08/react-unified-storage)](https://bundlephobia.com/package/@sitharaj08/react-unified-storage)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
@@ -400,30 +398,6 @@ pnpm test
 pnpm build
 ```
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/sitharaj08/react-unified-storage.git
-cd react-unified-storage
-
-# Install dependencies
-pnpm install
-
-# Start development
-pnpm dev
-
-# Run tests
-pnpm test
-
-# Build packages
-pnpm build
-```
-
 ## 🙏 Acknowledgments
 
 - [Zod](https://zod.dev/) for schema validation
@@ -441,158 +415,6 @@ pnpm build
 ```
 
 ## 📄 License
-
-MIT © [Sitharaj Seenivasan](https://github.com/sitharaj08)
-
-## 🙏 Acknowledgments
-
-- [Zod](https://zod.dev/) for schema validation
-- [fflate](https://github.com/101arrowz/fflate) for compression
-- [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel) for cross-tab sync
-
----
-
-Made with ❤️ by [Sitharaj Seenivasan](https://github.com/sitharaj08)
-
-## Quickstart
-
-```tsx
-import { StorageProvider, useStore } from '@sitharaj08/react-unified-storage';
-
-function App() {
-  return (
-    <StorageProvider config={{ driver: 'auto' }}>
-      <Counter />
-    </StorageProvider>
-  );
-}
-
-function Counter() {
-  const [count, setCount] = useStore('counter', { defaultValue: 0 });
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>+</button>
-    </div>
-  );
-}
-```
-
-## Installation
-
-```bash
-pnpm add @sitharaj08/react-unified-storage
-# or
-npm install @sitharaj08/react-unified-storage
-# or
-yarn add @sitharaj08/react-unified-storage
-```
-
-## Drivers
-
-| Driver | Description | SSR | Persistence | Size Limit |
-|--------|-------------|-----|-------------|------------|
-| `auto` | Chooses best available (IndexedDB → localStorage → memory) | ✅ | ✅ | Varies |
-| `idb` | IndexedDB (recommended for large data) | ❌ | ✅ | ~50MB |
-| `local` | localStorage | ❌ | ✅ | ~5-10MB |
-| `session` | sessionStorage | ❌ | Tab-only | ~5-10MB |
-| `memory` | In-memory (fallback) | ✅ | Tab-only | Unlimited |
-
-## Configuration
-
-```tsx
-<StorageProvider config={{
-  driver: 'auto',           // Storage driver
-  namespace: 'myapp',       // Key prefix
-  broadcast: true,          // Cross-tab sync
-  encryption: {             // AES-GCM encryption
-    key: 'your-secret-key',
-    salt: 'optional-salt'
-  },
-  compression: true,        // Gzip compression
-  errorHandler: console.error
-}}>
-  <App />
-</StorageProvider>
-```
-
-## Hooks
-
-### useStore
-
-```tsx
-const [value, setValue, meta] = useStore(key, {
-  defaultValue: 'default',
-  schema: z.string(),       // Zod validation
-  version: 1,               // Data version
-  metadata: true            // Include metadata
-});
-
-// meta = { createdAt, updatedAt, expiresAt?, driver, version }
-```
-
-### Suspense Support
-
-```tsx
-const [value, setValue] = useStoreSuspense(key, options);
-```
-
-## TTL (Time To Live)
-
-```tsx
-// Expires in 1 hour
-await write('temp', data, { ttlMs: 60 * 60 * 1000 });
-```
-
-## Schema Validation & Migrations
-
-```tsx
-import { z } from 'zod';
-
-const userSchema = z.object({
-  name: z.string(),
-  age: z.number()
-});
-
-const [user, setUser] = useStore('user', {
-  schema: userSchema,
-  version: 2
-});
-
-// Automatic migration from v1 to v2
-```
-
-## Encryption
-
-```tsx
-<StorageProvider config={{
-  encryption: {
-    key: 'your-32-char-secret-key-here',
-    salt: 'optional-salt-for-pbkdf2'
-  }
-}}>
-```
-
-Uses PBKDF2 key derivation and AES-GCM encryption.
-
-## SSR Guide
-
-The library automatically detects SSR and falls back to memory storage:
-
-```tsx
-// Server-side: uses memory
-// Client-side: uses IndexedDB/localStorage
-<StorageProvider config={{ driver: 'auto' }}>
-```
-
-## Roadmap
-
-- [ ] RN/Expo AsyncStorage driver
-- [ ] DevTools overlay
-- [ ] Collection API for IndexedDB
-- [ ] React Query integration
-
-## License
 
 Copyright 2025 Sitharaj Seenivasan
 
