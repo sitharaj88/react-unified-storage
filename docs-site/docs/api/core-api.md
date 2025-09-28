@@ -13,14 +13,14 @@ This document provides comprehensive API documentation for the `@sitharaj08/reac
 
 ## Setup & Configuration
 
-### `setup(config: StorageConfig): Promise<void>`
+### `setup(config: StorageConfig): void`
 
 Initializes the storage system with the provided configuration. This must be called before using any other storage functions.
 
 ```typescript
 import { setup } from '@sitharaj08/react-unified-storage-core';
 
-await setup({
+setup({
   driver: 'auto',
   namespace: 'myapp',
   encryption: { key: 'secret-key' },
@@ -68,13 +68,18 @@ interface StorageConfig {
 
 ## Data Operations
 
-### `read<T>(key: string): Promise<T | null>`
+### `read<T>(key: string, schema?: z.ZodSchema<T>): Promise<T | null>`
 
 Reads data from storage by key.
 
 ```typescript
 const user = await read<User>('user-profile');
 // Returns: User object or null if not found
+
+// With schema validation
+import { z } from 'zod';
+const userSchema = z.object({ name: z.string(), age: z.number() });
+const user = await read('user-profile', userSchema);
 ```
 
 **Type Parameters:**
@@ -82,10 +87,11 @@ const user = await read<User>('user-profile');
 
 **Parameters:**
 - `key: string` - Storage key
+- `schema?: z.ZodSchema<T>` - Optional Zod schema for validation
 
 **Returns:** `Promise<T | null>`
 
-### `write<T>(key: string, value: T, options?: WriteOptions): Promise<void>`
+### `write<T>(key: string, data: T, options?: { v?: number; ttlMs?: number }): Promise<void>`
 
 Writes data to storage with optional metadata.
 
@@ -103,22 +109,12 @@ await write('user-settings', {
 
 **Parameters:**
 - `key: string` - Storage key
-- `value: T` - Data to store
-- `options?: WriteOptions` - Optional write configuration
+- `data: T` - Data to store
+- `options?: { v?: number; ttlMs?: number }` - Optional configuration
+  - `v?: number` - Version number for the data
+  - `ttlMs?: number` - Time-to-live in milliseconds
 
-### `WriteOptions`
-
-Options for write operations.
-
-```typescript
-interface WriteOptions {
-  /** Time to live in milliseconds */
-  ttlMs?: number;
-
-  /** Data version for migration support */
-  version?: number;
-}
-```
+**Returns:** `Promise<void>`
 
 ### `remove(key: string): Promise<void>`
 
@@ -160,25 +156,32 @@ await clearAll();  // Removes everything
 
 ## Collections API
 
-### `createCollection<T>(name: string): Collection<T>`
+### `createCollection<T>(name: string, config?: Partial<StorageConfig>): Collection<T>`
 
 Creates a typed collection for structured data management.
 
 ```typescript
 interface Todo {
-  id: number;
   title: string;
   completed: boolean;
 }
 
 const todos = createCollection<Todo>('todos');
+
+// Or with custom config
+const secureTodos = createCollection<Todo>('todos', {
+  driver: 'idb',
+  encryption: { key: 'secret-password' },
+  compression: true
+});
 ```
 
 **Type Parameters:**
-- `T` - Collection item type (must include `id` field)
+- `T` - Collection item type
 
 **Parameters:**
 - `name: string` - Collection name
+- `config?: Partial<StorageConfig>` - Optional storage configuration
 
 **Returns:** `Collection<T>` instance
 
@@ -187,21 +190,27 @@ const todos = createCollection<Todo>('todos');
 Interface for collection operations.
 
 ```typescript
-interface Collection<T extends { id: string | number }> {
-  /** Add a new item to the collection */
-  add(item: Omit<T, 'id'>): Promise<T>;
+interface Collection<T = unknown> {
+  /** Add a new item to the collection (ID auto-generated) */
+  add(item: T): Promise<void>;
 
   /** Get an item by ID */
-  get(id: string | number): Promise<T | null>;
+  get(id: string): Promise<T | null>;
 
   /** Update an existing item */
-  update(id: string | number, updates: Partial<T>): Promise<T>;
+  update(id: string, item: T): Promise<void>;
 
   /** Remove an item by ID */
-  remove(id: string | number): Promise<void>;
+  remove(id: string): Promise<void>;
 
-  /** List all items with optional filter */
-  list(filter?: (item: T) => boolean): Promise<T[]>;
+  /** List all items in the collection */
+  list(): Promise<T[]>;
+
+  /** Find items matching a predicate */
+  find(predicate: (item: T) => boolean): Promise<T[]>;
+
+  /** Get the count of items in the collection */
+  count(): Promise<number>;
 
   /** Clear all items in the collection */
   clear(): Promise<void>;
@@ -211,17 +220,20 @@ interface Collection<T extends { id: string | number }> {
 **Example Usage:**
 
 ```typescript
-// Add items
-const newTodo = await todos.add({
+// Add items (ID is auto-generated)
+await todos.add({
   title: 'Learn TypeScript',
   completed: false
 });
-// Returns: { id: 1, title: 'Learn TypeScript', completed: false }
 
-// Update items
-const updated = await todos.update(1, { completed: true });
+// Get all items
+const allTodos = await todos.list();
 
-// Query items
+// Find completed items
+const completedTodos = await todos.find(todo => todo.completed);
+
+// Get item count
+const count = await todos.count();
 const completedTodos = await todos.list(todo => todo.completed);
 
 // Remove items
