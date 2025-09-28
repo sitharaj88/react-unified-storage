@@ -66,14 +66,13 @@ const config: Config = {
 
   themeConfig: {
     // Social card
-    image: 'img/social-card.jpg',
+    image: 'img/react-unified-storage-social-card.svg',
     colorMode: {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'React Unified Storage',
       logo: {
-        alt: 'React Unified Storage Logo',
+        alt: 'React Unified Storage',
         src: 'img/react-unified-storage-logo.svg',
       },
       items: [
@@ -89,7 +88,6 @@ const config: Config = {
           position: 'left',
           label: 'API Reference',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/sitharaj88/react-unified-storage',
           label: 'GitHub',
