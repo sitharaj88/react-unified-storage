@@ -400,6 +400,46 @@ pnpm test
 pnpm build
 ```
 
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/sitharaj08/react-unified-storage.git
+cd react-unified-storage
+
+# Install dependencies
+pnpm install
+
+# Start development
+pnpm dev
+
+# Run tests
+pnpm test
+
+# Build packages
+pnpm build
+```
+
+## 🙏 Acknowledgments
+
+- [Zod](https://zod.dev/) for schema validation
+- [fflate](https://github.com/101arrowz/fflate) for compression
+- [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel) for cross-tab sync
+
+## Roadmap
+
+- [ ] RN/Expo AsyncStorage driver
+- [ ] DevTools overlay
+- [ ] Collection API for IndexedDB
+- [ ] React Query integration
+
+## License
+```
+
 ## 📄 License
 
 MIT © [Sitharaj Seenivasan](https://github.com/sitharaj08)
