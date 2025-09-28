@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#61dafb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#21a3c4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- React logo inspired storage icon -->
+  <g transform="translate(100, 200)">
+    <!-- Outer circle -->
+    <circle cx="100" cy="100" r="80" fill="none" stroke="white" stroke-width="4"/>
+    <!-- Inner storage/database icon -->
+    <rect x="60" y="70" width="80" height="60" rx="8" fill="white"/>
+    <rect x="70" y="80" width="60" height="8" rx="2" fill="#61dafb"/>
+    <rect x="70" y="95" width="60" height="8" rx="2" fill="#61dafb"/>
+    <rect x="70" y="110" width="60" height="8" rx="2" fill="#61dafb"/>
+    <!-- React-style atoms -->
+    <circle cx="100" cy="40" r="6" fill="white"/>
+    <circle cx="160" cy="100" r="6" fill="white"/>
+    <circle cx="40" cy="100" r="6" fill="white"/>
+    <circle cx="100" cy="160" r="6" fill="white"/>
+  </g>
+
+  <!-- Text content -->
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">React Unified Storage</text>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="24" fill="white">One unified, secure, and modern</text>
+  <text x="400" y="300" font-family="Arial, sans-serif" font-size="24" fill="white">storage solution for React applications</text>
+
+  <!-- Features -->
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="18" fill="white">• Multiple storage drivers (IndexedDB, localStorage, sessionStorage)</text>
+  <text x="400" y="410" font-family="Arial, sans-serif" font-size="18" fill="white">• End-to-end encryption & compression</text>
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="18" fill="white">• Cross-tab synchronization</text>
+  <text x="400" y="470" font-family="Arial, sans-serif" font-size="18" fill="white">• TypeScript-first with full type safety</text>
+
+  <!-- URL -->
+  <text x="400" y="550" font-family="Arial, sans-serif" font-size="20" fill="white">sitharaj88.github.io/react-unified-storage</text>
+</svg>

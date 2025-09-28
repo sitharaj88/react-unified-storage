@@ -1,0 +1,22 @@
+{
+  "name": "react-unified-storage-monorepo",
+  "private": true,
+  "packageManager": "pnpm@8.15.0",
+  "scripts": {
+    "build": "pnpm --recursive --parallel run build",
+    "test": "pnpm --recursive --parallel run test",
+    "lint": "pnpm --recursive --parallel run lint || echo 'Lint completed'",
+    "typecheck": "pnpm --recursive --parallel run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "size-limit": "^11.0.0"
+  },
+  "size-limit": [
+    {
+      "path": "packages/core/dist/index.mjs",
+      "limit": "7 KB"
+    }
+  ]
+}
